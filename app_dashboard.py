@@ -1,12 +1,11 @@
 import streamlit as st
-import MetaTrader5 as mt5
 import pandas as pd
 import json
 import time
 
 st.set_page_config(page_title="ICT Multi-Asset Cockpit", layout="wide")
 
-# This shortcut auto-refreshes the layout screen every few seconds
+# Auto-refresh tracking mechanism
 if "run_count" not in st.session_state:
     st.session_state.run_count = 0
 st.session_state.run_count += 1
@@ -22,58 +21,35 @@ def load_live_bot_states():
     except:
         return {}
 
-# Load the fresh data matrix
+# Load the fresh matrix data from the bot database
 live_data = load_live_bot_states()
 
-if not mt5.initialize():
-    st.error("🔴 Terminal Linking Failed! Please keep your desktop MetaTrader 5 application open.")
-else:
-    account = mt5.account_info()
+# --- MAIN SCANNER INTERFACE ---
+st.header("📊 Multi-Asset Strategy Matrix")
+
+assets = ["USNDAQ100", "US30", "US500"]
+cols = st.columns(len(assets))
+
+for i, asset in enumerate(assets):
+    asset_state = live_data.get(asset, {"htf_bias": False, "bos_confirmed": False, "fvg_identified": False, "ifvg_triggered": False})
     
-    # --- SIDEBAR ACCOUNT METRICS ---
-    st.sidebar.header("🎛️ Account Cockpit")
-    st.sidebar.metric(label="Demo Balance", value=f"${account.balance:,.2f}" if account else "$0.00")
-    st.sidebar.metric(label="Free Margin", value=f"${account.margin_free:,.2f}" if account else "$0.00")
-    
-    # --- MAIN SCANNER INTERFACE ---
-    st.header("📊 Multi-Asset Strategy Matrix")
-    
-    assets = ["USNDAQ100", "US30", "US500"]
-    cols = st.columns(len(assets))
-    
-    for i, asset in enumerate(assets):
-        # Extract individual parameters for this specific index from our shared file
-        asset_state = live_data.get(asset, {"htf_bias": False, "bos_confirmed": False, "fvg_identified": False, "ifvg_triggered": False})
+    with cols[i]:
+        st.subheader(f"🔍 {asset}")
         
-        with cols[i]:
-            st.subheader(f"🔍 {asset}")
-            
-            # These checkboxes now actively mirror your running Python bot logic!
-            st.checkbox(f"HTF Sweep Confirmed", value=asset_state["htf_bias"], key=f"htf_{asset}", disabled=True)
-            st.checkbox(f"M5 Break of Structure", value=asset_state["bos_confirmed"], key=f"bos_{asset}", disabled=True)
-            st.checkbox(f"M5 FVG Retested/Filled", value=asset_state["fvg_identified"], key=f"fvg_{asset}", disabled=True)
-            st.checkbox(f"M1 iFVG Catalyst Triggered", value=asset_state["ifvg_triggered"], key=f"m1_{asset}", disabled=True)
-            
-            # Dynamic visual status badges
-            if asset_state["ifvg_triggered"]:
-                st.success("🎯 Setup Triggered! Executing Order...")
-            elif asset_state["htf_bias"]:
-                st.warning("👀 HTF Sweep Active. Tracking Structure...")
-            else:
-                st.write("⚪ Scanning for liquidity sweeps...")
-            st.markdown("---")
+        st.checkbox(f"HTF Sweep Confirmed", value=asset_state["htf_bias"], key=f"htf_{asset}", disabled=True)
+        st.checkbox(f"M5 Break of Structure", value=asset_state["bos_confirmed"], key=f"bos_{asset}", disabled=True)
+        st.checkbox(f"M5 FVG Retested/Filled", value=asset_state["fvg_identified"], key=f"fvg_{asset}", disabled=True)
+        st.checkbox(f"M1 iFVG Catalyst Triggered", value=asset_state["ifvg_triggered"], key=f"m1_{asset}", disabled=True)
+        
+        if asset_state["ifvg_triggered"]:
+            st.success("🎯 Setup Triggered! Executing Order...")
+        elif asset_state["htf_bias"]:
+            st.warning("👀 HTF Sweep Active. Tracking Structure...")
+        else:
+            st.write("⚪ Scanning for liquidity sweeps...")
+        st.markdown("---")
 
-    # --- LIVE ORDERS TRACKER ---
-    st.header("💼 Live Position Monitor")
-    positions = mt5.positions_get()
-    if not positions:
-        st.write("No active open positions detected on your MT5 terminal.")
-    else:
-        df = pd.DataFrame(list(positions), columns=positions._asdict().keys())
-        st.dataframe(df[['symbol', 'type', 'volume', 'price_open', 'sl', 'tp', 'profit']], use_container_width=True)
-
-    mt5.shutdown()
-
-# Forces the web browser app to refresh its data screen automatically every 5 seconds
+# Forces the cloud page dashboard layout screen to refresh every 5 seconds
 time.sleep(5)
 st.rerun()
+
