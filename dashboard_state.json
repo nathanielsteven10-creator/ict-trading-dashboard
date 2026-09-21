@@ -30,7 +30,7 @@
         "ifvg_triggered": false
     },
     "#US100_Z26": {
-        "htf_bias": true,
+        "htf_bias": false,
         "bos_confirmed": true,
         "fvg_identified": true,
         "ifvg_triggered": false
