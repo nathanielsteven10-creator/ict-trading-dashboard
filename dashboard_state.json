@@ -54,8 +54,8 @@
         "ifvg_triggered": false
     },
     "#DJ30_Z26": {
-        "htf_bias": false,
-        "bos_confirmed": true,
+        "htf_bias": true,
+        "bos_confirmed": false,
         "fvg_identified": true,
         "ifvg_triggered": false
     }
