@@ -1,1 +1,56 @@
-{"USNDAQ100": {"htf_bias": false, "bos_confirmed": false, "fvg_identified": false, "ifvg_triggered": false}, "US30": {"htf_bias": false, "bos_confirmed": false, "fvg_identified": false, "ifvg_triggered": false}, "US500": {"htf_bias": false, "bos_confirmed": false, "fvg_identified": false, "ifvg_triggered": false}}
+{
+    "USNDAQ100": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "US30": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "US500": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "US100_Z26": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "US500_Z26": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "#US100_Z26": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "#US30_Z26": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "#US500_Z26": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    },
+    "#US30": {
+        "htf_bias": false,
+        "bos_confirmed": false,
+        "fvg_identified": false,
+        "ifvg_triggered": false
+    }
+}
