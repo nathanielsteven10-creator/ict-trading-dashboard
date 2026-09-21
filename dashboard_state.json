@@ -50,7 +50,7 @@
     "#US30": {
         "htf_bias": false,
         "bos_confirmed": false,
-        "fvg_identified": true,
+        "fvg_identified": false,
         "ifvg_triggered": false
     }
 }
