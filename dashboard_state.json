@@ -31,8 +31,8 @@
     },
     "#US100_Z26": {
         "htf_bias": false,
-        "bos_confirmed": true,
-        "fvg_identified": true,
+        "bos_confirmed": false,
+        "fvg_identified": false,
         "ifvg_triggered": true
     },
     "#US30_Z26": {
