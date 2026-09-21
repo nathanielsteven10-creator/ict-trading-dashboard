@@ -42,9 +42,9 @@
         "ifvg_triggered": false
     },
     "#US500_Z26": {
-        "htf_bias": false,
+        "htf_bias": true,
         "bos_confirmed": false,
-        "fvg_identified": true,
+        "fvg_identified": false,
         "ifvg_triggered": false
     },
     "#US30": {
