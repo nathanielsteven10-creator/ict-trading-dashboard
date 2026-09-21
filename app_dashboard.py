@@ -27,7 +27,7 @@ live_data = load_live_bot_states()
 # --- MAIN SCANNER INTERFACE ---
 st.header("📊 Multi-Asset Strategy Matrix")
 
-assets = ["USNDAQ100", "US30", "US500"]
+assets = ["#US100_Z26", "#US30", "#US500_Z26"]
 cols = st.columns(len(assets))
 
 for i, asset in enumerate(assets):
