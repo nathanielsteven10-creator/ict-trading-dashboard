@@ -32,7 +32,7 @@
     "#US100_Z26": {
         "htf_bias": false,
         "bos_confirmed": false,
-        "fvg_identified": false,
+        "fvg_identified": true,
         "ifvg_triggered": false
     },
     "#US30_Z26": {
