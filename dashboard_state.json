@@ -45,7 +45,7 @@
         "htf_bias": true,
         "bos_confirmed": false,
         "fvg_identified": false,
-        "ifvg_triggered": true
+        "ifvg_triggered": false
     },
     "#US30": {
         "htf_bias": false,
